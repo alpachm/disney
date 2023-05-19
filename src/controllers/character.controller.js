@@ -30,16 +30,42 @@ exports.findAll = catchAsync(async (req, res, next) => {
     status: true,
   };
 
+  let whereMovieClause = {};
+
   if (name) {
     whereClause.name = {
       [Op.like]: `%${name}%`,
     };
-  } else if (age) {
+  }
+
+  if (age) {
     whereClause.age = age;
+  }
+
+  if (movie) {
+    whereMovieClause.title = {
+      [Op.like]: `%${movie}%`,
+    };
   }
 
   characters = await db.Character.findAll({
     where: whereClause,
+    attributes: { exclude: ['createdAt', 'updatedAt'] },
+    include: [
+      {
+        model: db.CharacterMovies,
+        attributes: {
+          exclude: ['character_id', 'movie_id', 'createdAt', 'updatedAt'],
+        },
+        include: [
+          {
+            model: db.Movie,
+            attributes: { exclude: ['createdAt', 'updatedAt'] },
+            where: whereMovieClause,
+          },
+        ],
+      },
+    ],
   });
 
   if (!characters.length) next(new AppError('Characters not found', 404));
@@ -68,11 +94,11 @@ exports.update = catchAsync(async (req, res, next) => {
   const { name, age, weight, biography, image } = req.body;
 
   await character.update({
-    name: name.toLowerCase() || character.name,
-    age: age || character.age,
-    weight: weight || character.weight,
-    biography: biography.toLowerCase() || character.biography,
-    image: image || character.image,
+    name,
+    age,
+    weight,
+    biography,
+    image,
   });
 
   res.status(200).json({

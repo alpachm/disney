@@ -10,6 +10,19 @@ exports.validIfCharacterExist = catchAsync(async (req, res, next) => {
       id,
       status: true,
     },
+    attributes: { exclude: ['createdAt', 'updatedAt'] },
+    include: [
+      {
+        model: db.CharacterMovies,
+        attributes: ['id'],
+        include: [
+          {
+            model: db.Movie,
+            attributes: { exclude: ['createdAt', 'updatedAt'] },
+          },
+        ],
+      },
+    ],
   });
 
   if (!character)

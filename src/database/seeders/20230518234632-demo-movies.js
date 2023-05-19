@@ -73,7 +73,7 @@ module.exports = {
         {
           image:
             'https://es.web.img3.acsta.net/medias/nmedia/18/68/20/31/19785394.jpg?coixp=47&coiyp=41',
-          title: `AlaEl rey leónddín`,
+          title: `El rey león`,
           creationDate: '1994-06-30',
           score: 5,
           createdAt: moment().format('YYYY-MM-DD'),
