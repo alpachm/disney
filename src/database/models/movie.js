@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Movie.hasMany(models.CharacterMovies, { foreignKey: 'movie_id' });
+      Movie.hasMany(models.genreMovies, { foreignKey: 'movie_id' });
     }
   }
   Movie.init(
@@ -24,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       title: {
-        type: DataTypes.STRING(30),
+        type: DataTypes.STRING(255),
       },
       creationDate: {
         type: DataTypes.DATE,
@@ -37,6 +38,11 @@ module.exports = (sequelize, DataTypes) => {
           min: 1,
           max: 5,
         },
+      },
+      status: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
       },
     },
     {

@@ -7,6 +7,9 @@ const xss = require('xss-clean');
 const rateLimit = require('express-rate-limit');
 const globalErrorHandler = require('./controllers/error.controller');
 const AppError = require('./utils/appError');
+const authRouter = require('./routes/auth.routes');
+const characterRouter = require('./routes/character.routes');
+const movieRouter = require('./routes/movie.routes');
 
 const app = express();
 
@@ -24,6 +27,10 @@ app.use(cors());
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
 app.use('/api/v1', limiter);
+
+app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/characters', characterRouter);
+app.use('/api/v1/movies', movieRouter);
 
 app.all('*', (req, res, next) =>
   next(
