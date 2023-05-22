@@ -69,6 +69,15 @@ La aplicación backend proporciona una API para gestionar y acceder a datos rela
    - GET: http://localhost:3010/api/v1/characters
      Devuelve todos los personajes donde también muestra las peliculas donde aparecen
 
+     - GET: http://localhost:3010/api/v1/characters?name=nombre
+       Devuelve los personajes que coincidan con el nombre ingresado
+
+     - GET: http://localhost:3010/api/v1/characters?age=edad
+       Devuelve los personajes que coincidan con la edad ingresada
+
+     - GET: http://localhost:3010/api/v1/characters?movie=nombre
+       Devuelve los personajes y muestra las peliculas en las que aparecen que concidan con el nombre ingresado
+
    - POST: http://localhost:3010/api/v1/characters
      Crea un nuevo personaje
 
@@ -88,6 +97,12 @@ La aplicación backend proporciona una API para gestionar y acceder a datos rela
 
    - GET: http://localhost:3010/api/v1/movies
      Devuelva todas las peliculas
+
+     - GET: http://localhost:3010/api/v1/movies?name=nombre
+       Devuelva todas las peliculas donde el titulo coincida con el nombre ingresado
+
+     - GET: http://localhost:3010/api/v1/movies?order=ASC|DESC
+       Devuelva todas las peliculas en orden ASC o DESC
 
    - GET: http://localhost:3010/api/v1/movies/1
      Devuelve una pelicula en especifico usando su ID

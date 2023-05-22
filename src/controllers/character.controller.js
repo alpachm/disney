@@ -43,6 +43,7 @@ exports.findAll = catchAsync(async (req, res, next) => {
   }
 
   if (movie) {
+    console.log(movie);
     whereMovieClause.title = {
       [Op.like]: `%${movie}%`,
     };

@@ -21,7 +21,7 @@ exports.create = catchAsync(async (req, res, next) => {
 });
 
 exports.findAll = catchAsync(async (req, res, next) => {
-  const { name, genre, order } = req.query;
+  const { name, order } = req.query;
 
   let movies;
 
@@ -31,9 +31,6 @@ exports.findAll = catchAsync(async (req, res, next) => {
 
   if (name) {
     whereClause.title = { [Op.like]: `%${name}%` };
-  }
-
-  if (genre) {
   }
 
   movies = await db.Movie.findAll({
